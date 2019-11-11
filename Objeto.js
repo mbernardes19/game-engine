@@ -1,28 +1,28 @@
+import Animacao from "./animacao/Animacao.js";
+
 export default class Objeto {
+    id;
+    x = 0;
+    y = 0;
     altura;
     largura;
     meiaAltura;
     meiaLargura;
-    x;
-    y;
-    vX;
-    vY;
-    aX;
-    aY;
+    velocidadeX;
+    velocidadeY;
+    aceleracaoX;
+    aceleracaoY;
     tipoCorpo;
     tipoColisao;
     restituicao;
-    constructor(x, y, altura, largura, vX, vY, aX, aY, tipoCorpo, tipoColisao){
-        this.x = x;
-        this.y = y;
-        this.altura = altura;
-        this.largura = largura;
-        this.vX = vX || 0;
-        this.vY = vY || 0;
-        this.aX = aX || 0;
-        this.aY = aY || 0;
+    constructor(id,  x, y, altura, largura, tipoCorpo){
+        this.id = id || 'nao-definido';
+        this.x = x || 0;
+        this.y = y || 0;
+        this.altura = altura || 50;
+        this.largura = largura || 50;
         this.tipoCorpo = tipoCorpo || Objeto.ESTATICO;
-        this.tipoColisao = tipoColisao || Objeto.NAOELASTICA;
+        // this.tipoColisao = tipoColisao || Objeto.NAOELASTICA;
     };
 
     getXMeio(){

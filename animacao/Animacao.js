@@ -1,11 +1,10 @@
 export default class Animacao {
 
-    constructor(sprites, qtdSprites=0, duracao=5, fps=1/30, canvasCtx=new CanvasRenderingContext2D()) {
+    constructor(id, sprites, duracao=5, fps=1/3) {
+        this.id = id;
         this.sprites = sprites;
-        this.qtdSprites = qtdSprites;
         this.duracao = duracao;
         this.fps = 1/fps;
-        this.canvasCtx = canvasCtx;
     }
 
     renderizar() {
