@@ -62,8 +62,7 @@ export default class GerenciadorAnimacao {
     }
 
     pegarObjeto(idObjeto) {
-        const objetosGerais = this.objetoAnimacoes.map(item => item.objeto);
-        return objetosGerais.find(obj => obj.id == idObjeto);
+        return this.cenaAtual.objetos.find(obj => obj.id == idObjeto);
     }
 
     reproduzir(animacaoPesq) {
@@ -81,7 +80,7 @@ export default class GerenciadorAnimacao {
                 }
             }
             
-            this.canvasCtx.clearRect(0,0, window.innerWidth, window.innerHeight);     
+            this.canvasCtx.clearRect(objeto.x,objeto.y, objeto.largura, objeto.altura);     
             this.canvasCtx.drawImage(
                 animacao.sprites[i].spritesheet.imagem,
                 animacao.sprites[i].inicioX,

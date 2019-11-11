@@ -1,4 +1,5 @@
 import Cena from "./Cena.js";
+import Cenario from './Cenario.js';
 
 export default class GerenciadorCena {
     cenas = [];
@@ -9,7 +10,7 @@ export default class GerenciadorCena {
         this.cenas = cenas || [];
     }
 
-    criar(id, objetos, cenario) {
+    criarCena(id, objetos, cenario) {
         const novaCena = new Cena(id, objetos, cenario);
         this.cenas.push(novaCena);
         this.definirAtual(id);
@@ -24,4 +25,17 @@ export default class GerenciadorCena {
         return this.cenas.find(cena => cena.id == idCena);
     }
 
+    criarCenario(idCenario, urlImg) {
+        return new Cenario('fase1',0,0,50,50,urlImg);
+    }
+
+    mudarCenario(cenarioNovo) {
+        this.cenaAtual.cenario = cenarioNovo;
+    }
+
+    renderizar() {
+        setInterval(() => {
+            this.canvasCtx.drawImage(this.cenaAtual.cenario.imagem, this.cenaAtual.cenario.x, this.cenaAtual.cenario.y); 
+        }, 2000);
+    }
 }

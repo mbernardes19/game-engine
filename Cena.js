@@ -12,6 +12,10 @@ export default class Cena {
         this.objetos.push(objetos);
     }
 
+    mudarCenario(cenario) {
+        this.cenario = cenario;
+    }
+
 
 
  
