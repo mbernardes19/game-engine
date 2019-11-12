@@ -4,10 +4,22 @@ import GerenciadorAnimacao from './animacao/GerenciadorAnimacao.js';
 import GerenciadorCena from './GerenciadorCena.js';
 import Cenario from './Cenario.js';
 import GameView from './GameView.js';
+import Game from './Game.js';
 
+// Setar contexto 2d do canvas
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
+// Criar jogo com o contexto do canvas
+const game = new Game(ctx);
+
+
+
+
+
+
+
+/*
 // Criar um gerenciador de cena e uma cena com um objeto
 
 // Cria gerenciadores
@@ -28,3 +40,4 @@ gerenciadorAnimacoes.criar('mario-andar', spritesAndar, 'mario');
 
 const gameView = new GameView(ctx, gerenciadorCenas, gerenciadorAnimacoes);
 gameView.renderizar();
+*/

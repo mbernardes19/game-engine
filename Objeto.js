@@ -15,13 +15,15 @@ export default class Objeto {
     tipoCorpo;
     tipoColisao;
     restituicao;
-    constructor(id,  x, y, altura, largura, tipoCorpo){
-        this.id = id || 'nao-definido';
-        this.x = x || 0;
-        this.y = y || 0;
-        this.altura = altura || 50;
-        this.largura = largura || 50;
-        this.tipoCorpo = tipoCorpo || Objeto.ESTATICO;
+    constructor(id = 'nao-definido',  x=0, y=0, altura=50, largura=50, tipoCorpo=Objeto.ESTATICO){
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.altura = altura;
+        this.largura = largura;
+        this.tipoCorpo = tipoCorpo;
+        this.velocidadeY = 10;
+        this.velocidadeX = 10;
         // this.tipoColisao = tipoColisao || Objeto.NAOELASTICA;
     };
 

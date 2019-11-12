@@ -1,34 +1,40 @@
 import Cena from "./Cena.js";
 import Cenario from './Cenario.js';
+import GameModel from "./GameModel.js";
 
 export default class GameView {
-    gerenciadorCenas;
-    gerenciadorAnimacao;
+    /**@type {CanvasRenderingContext2D} */
     canvasCtx;
-    constructor(canvasCtx, gerenciadorCenas, gerenciadorAnimacao) {
+    CANVAS_HEIGHT;
+    CANVAS_WIDTH;
+    /**
+     * 
+     * @param {CanvasRenderingContext2D} canvasCtx 
+     */
+    constructor(canvasCtx) {
         this.canvasCtx = canvasCtx;
-        this.gerenciadorCenas = gerenciadorCenas || undefined;
-        this.gerenciadorAnimacao = gerenciadorAnimacao || undefined;
+        this.CANVAS_WIDTH = this.canvasCtx.canvas.width;
+        this.CANVAS_HEIGHT = this.canvasCtx.canvas.height;
+    }
+    /**
+     * 
+     * @param {GameModel} model 
+     */
+    atualizar(model) {
+        this.canvasCtx.clearRect(0,0,this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
+        this.canvasCtx.fillText('X do jogador',0,40);
+        this.canvasCtx.fillText(model.jogador.x,0,50);
     }
 
-    renderizarCenario() {
+   /* renderizarCenario() {
         
         this.canvasCtx.drawImage(
-            this.gerenciadorCenas.cenaAtual.cenario.imagem,
-            this.gerenciadorCenas.cenaAtual.cenario.x,
-            this.gerenciadorCenas.cenaAtual.cenario.y
+
         ); 
 
-    }
+    }*/
 
-    renderizarCena() {
-        this.gerenciadorAnimacao.reproduzir('mario-andar');
-    }
-
-    renderizar() {
-        setInterval(() => {
-            this.renderizarCenario();
-            this.renderizarCena();
-        }, 2000);
-    }
+   /* renderizarCena() {
+        this.canvasCtx.fillText()
+    }*/
 }

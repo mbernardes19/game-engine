@@ -1,15 +1,27 @@
 import Cena from "./Cena.js";
 import Cenario from './Cenario.js';
+import Objeto from "./Objeto.js";
 
 export default class GerenciadorCena {
     cenas = [];
     cenaAtual;
-    canvasCtx;
-    constructor(canvasCtx, cenas) {
-        this.canvasCtx = canvasCtx;
-        this.cenas = cenas || [];
+    constructor(cenas = []) {
+        this.cenas = cenas;
     }
 
+    atualizar() {
+        
+    }
+    /**
+     * Este método cria e retorna uma nova Cena
+     * @param {string} id
+     * id da nova cena
+     * @param {Array<Objeto>} objetos 
+     * objetos da nova cena
+     * @param {Cenario} cenario 
+     * cenário da nova cena
+     * @returns {Cena} novaCena
+     */
     criarCena(id, objetos, cenario) {
         const novaCena = new Cena(id, objetos, cenario);
         this.cenas.push(novaCena);
@@ -31,11 +43,5 @@ export default class GerenciadorCena {
 
     mudarCenario(cenarioNovo) {
         this.cenaAtual.cenario = cenarioNovo;
-    }
-
-    renderizar() {
-        setInterval(() => {
-            this.canvasCtx.drawImage(this.cenaAtual.cenario.imagem, this.cenaAtual.cenario.x, this.cenaAtual.cenario.y); 
-        }, 2000);
     }
 }
