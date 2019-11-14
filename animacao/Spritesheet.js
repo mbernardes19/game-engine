@@ -12,15 +12,4 @@ export default class Spritesheet {
         this.imagem = new Image();
         this.imagem.src = imagemUrl;
     }
-
-    criarSprites(inicioX, inicioY, larguraSprite, alturaSprite, qtdSprites) {
-        let sprites = [];
-
-        for(let i=0; i < qtdSprites; i++) {
-            let sprite = new Sprite(this,larguraSprite,alturaSprite,(inicioX+(larguraSprite*i)),inicioY);
-            sprites.push(sprite);
-        }
-
-        return sprites;
-    }
 }

@@ -1,7 +1,10 @@
 import Animacao from "./Animacao.js";
+import GerenciadorSprite from "../GerenciadorSprite.js";
 
 export default class GerenciadorAnimacao {
     gerenciadorCena;
+    /**@type {GerenciadorSprite} */
+    gerenciadorSprites;
     cenaAtual;
     objetoAnimacoes = [];
     canvasCtx;
@@ -15,14 +18,16 @@ export default class GerenciadorAnimacao {
 
     }
 
-    criar(id, spriteGroup, objetoId) {
-        if (this.objetoExisteEmCena(objetoId, this.cenaAtual)) {
+    criar(id, idSpriteGroup, idObjeto) {
+        if (this.objetoExisteEmCena(idObjeto, this.cenaAtual)) {
+            const spriteGroup = this.gerenciadorSprites.pegarSpriteGroupPorId(idSpriteGroup);
+
             const novaAnimacao = this.criarAnimacao(id, spriteGroup);
 
-            const objetoAnimacao = {objeto: objetoId, animacoes:[novaAnimacao]};
+            const objetoAnimacao = {objeto: idObjeto, animacoes:[novaAnimacao]};
     
             const objetoAnimacoesFiltrados = this.objetoAnimacoes.find((item) => {
-                return item.objeto.id === objetoId;
+                return item.objeto.id === idObjeto;
             });
     
             if(!objetoAnimacoesFiltrados) {

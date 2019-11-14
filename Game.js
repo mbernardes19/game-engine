@@ -4,6 +4,8 @@ import Personagem from "./Personagem.js";
 import GameView from "./GameView.js";
 import GameController from "./GameController.js";
 import GameModel from "./GameModel.js";
+import GerenciadorSprite from "./GerenciadorSprite.js";
+import Sprite from "./animacao/Sprite.js";
 
 export default class Game {
     canvasCtx;
@@ -27,6 +29,6 @@ export default class Game {
     }
 
     atualizar() {     
-        
+
     }
 }
