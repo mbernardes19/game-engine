@@ -15,6 +15,7 @@ export default class Objeto {
     tipoCorpo;
     tipoColisao;
     restituicao;
+    animacaoAtual;
     constructor(id = 'nao-definido',  x=0, y=0, altura=50, largura=50, tipoCorpo=Objeto.ESTATICO){
         this.id = id;
         this.x = x;
@@ -25,7 +26,11 @@ export default class Objeto {
         this.velocidadeY = 10;
         this.velocidadeX = 10;
         // this.tipoColisao = tipoColisao || Objeto.NAOELASTICA;
-    };
+    }
+
+    setAnimacaoAtual(idAnimacao) {
+        this.animacaoAtual = idAnimacao;
+    }
 
     getXMeio(){
         return this.x + this.meiaLargura;

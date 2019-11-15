@@ -1,4 +1,4 @@
-import Spritesheet from './animacao/Spritesheet.js';
+import Spritesheet from './Spritesheet.js';
 import Personagem from './Personagem.js'
 import GerenciadorAnimacao from './animacao/GerenciadorAnimacao.js';
 import GerenciadorCena from './GerenciadorCena.js';

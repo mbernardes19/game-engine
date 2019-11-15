@@ -6,6 +6,7 @@ export default class Cena {
         this.id = id;
         this.objetos = objetos;
         this.cenario = cenario;
+        this.jogador = this.objetos ? this.pegarJogador() : undefined;
     }
 
     adicionarObjetos(objetos) {
@@ -14,6 +15,14 @@ export default class Cena {
 
     mudarCenario(cenario) {
         this.cenario = cenario;
+    }
+
+    /**
+     * 
+     * @param {Array} objetos 
+     */
+    pegarJogador() {
+        return this.objetos.find(obj => obj.tipo ? obj.tipo == 'jogador' : false)
     }
 
 

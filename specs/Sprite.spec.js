@@ -1,6 +1,9 @@
+/* eslint-disable no-undef */
 import Animacao from "../animacao/Animacao.js";
-import Sprite from "../animacao/Sprite.js";
-import Spritesheet from "../animacao/Spritesheet.js";
+import Sprite from "../Sprite.js";
+import Spritesheet from "../Spritesheet.js";
+import { URL_IMAGEM_TESTE } from "./constantes.js";
+
 
 describe('Sprite', () =>{
     let spritesheet;
@@ -9,7 +12,7 @@ describe('Sprite', () =>{
     let spriteNoParameter;
 
     beforeEach(() => {
-        spritesheet = new Spritesheet(500,400,new Image());
+        spritesheet = new Spritesheet('teste', URL_IMAGEM_TESTE,500,400);
         spriteDefault = new Sprite(spritesheet);
         sprite = new Sprite(spritesheet,16,16,0,0);
     });
@@ -34,7 +37,7 @@ describe('Sprite', () =>{
         expect(spriteDefault.inicioY).toBe(0);
     });
 
-    it('ao inicializar somente com todos os parâmetros, as demais propriedades devem assumir esses valores', () => {
+    it('ao inicializar com todos os parâmetros, as demais propriedades devem assumir esses valores', () => {
         expect(sprite.largura).toBe(16);
         expect(sprite.altura).toBe(16);
         expect(sprite.inicioX).toBe(0);
@@ -42,6 +45,6 @@ describe('Sprite', () =>{
     });
 
     it('ao inicializar sem nenhum parâmetro, deve lançar um erro', () => {
-        expect(() => spriteNoParameter = new Sprite()).toThrow(Error('Sprite deve pelo menos o stylesheet preenchido nos parâmetros `Sprite(stylesheet)`'));
+        expect(() => spriteNoParameter = new Sprite()).toThrow(Error('Sprite deve ter o parâmetro `spritesheet` preenchido'));
     });
 });

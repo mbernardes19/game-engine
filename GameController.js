@@ -1,7 +1,9 @@
 import GameView from "./GameView.js";
-import Game from "./Game.js";
 import GameModel from "./GameModel.js";
 import InputHandler from "./InputHandler.js";
+import GerenciadorCena from "./GerenciadorCena.js";
+import GerenciadorAnimacao from "./animacao/GerenciadorAnimacao.js";
+import GerenciadorCenario from "./GerenciadorCenario.js";
 
 export default class GameController {
     /**@type {GameView} */
@@ -10,6 +12,8 @@ export default class GameController {
     model;
     /**@type {InputHandler} */
     input
+    /**@type {Map<String, Function>} */
+    comandos
     /** 
      * @param {GameView} view 
      * @param {GameModel} model 
@@ -17,47 +21,37 @@ export default class GameController {
     constructor(view, model) {
         this.view = view;
         this.model = model;
+        this.comandos = new Map();
         this.input = new InputHandler();
         this._tratarInput();
         this._gameLoop();
+
+        this.adicionarComando('direita',() => this.model.jogador.x += this.model.jogador.velocidadeX)
+        this.adicionarComando('esquerda',() => this.model.jogador.x -= this.model.jogador.velocidadeX)
+        this.adicionarComando('cima',() => this.model.jogador.y -= this.model.jogador.velocidadeY)
+        this.adicionarComando('baixo',() => this.model.jogador.y += this.model.jogador.velocidadeY)
     }
     /**
      * @private
      * Método privado
      */
     _tratarInput() {
-        document.addEventListener('cima',() => this.paraCima());
-        document.addEventListener('baixo',() => this.paraBaixo());
-        document.addEventListener('esquerda',() => this.paraEsquerda());
-        document.addEventListener('direita',() => this.paraDireita());
+        document.addEventListener('cima',() => this.executarComando('cima'));
+        document.addEventListener('baixo',() => this.executarComando('baixo'));
+        document.addEventListener('esquerda',() => this.executarComando('esquerda'));
+        document.addEventListener('direita',() => this.executarComando('direita'));
     }
-    /**
-     * Executa uma ação de mover o jogador para cima
-     * diminuindo sua propriedade 'y' de acordo com sua 'velocidadeY'
-     */
-    paraCima() {
-        this.model.jogador.y -= this.model.jogador.velocidadeY;
+
+    adicionarComando(idComando, acao) {
+        this.comandos.set(idComando, acao);
     }
-    /**
-     * Executa uma ação de mover o jogador para baixo
-     * aumentando sua propriedade 'y' de acordo com sua 'velocidadeY'
-     */
-    paraBaixo() {
-        this.model.jogador.y += this.model.jogador.velocidadeY;
+
+    executarComando(idComando) {
+        this.comandos.get(idComando)();
     }
-    /**
-     * Executa uma ação de mover o jogador para esquerda
-     * diminuindo sua propriedade 'x' de acordo com sua 'velocidadeX'
-     */
-    paraEsquerda() {
-        this.model.jogador.x -= this.model.jogador.velocidadeX;
-    }
-    /**
-     * Executa uma ação de mover o jogador para direita
-     * aumentando sua propriedade 'x' de acordo com sua 'velocidadeX'
-     */
-    paraDireita() {
-        this.model.jogador.x += this.model.jogador.velocidadeX;
+
+    removerComando(idComando) {
+        this.comandos.delete(idComando);
     }
     /**
      * Game Loop do jogo.
@@ -69,5 +63,3 @@ export default class GameController {
     }
     
 }
-
-GameController.view

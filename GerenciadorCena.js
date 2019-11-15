@@ -22,8 +22,13 @@ export default class GerenciadorCena {
      * cenário da nova cena
      * @returns {Cena} novaCena
      */
-    criarCena(id, objetos, cenario) {
-        const novaCena = new Cena(id, objetos, cenario);
+    criarCena(id, objetos=[], cenario=undefined) {
+        let novaCena;
+        if (cenario) {
+            novaCena = new Cena(id, objetos, cenario);
+        } else {
+            novaCena = new Cena(id, objetos);
+        }
         this.cenas.push(novaCena);
         this.definirAtual(id);
         return novaCena;

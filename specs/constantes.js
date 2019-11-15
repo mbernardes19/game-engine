@@ -1,0 +1,1 @@
+export const URL_IMAGEM_TESTE = 'http://127.0.0.1:8887/specs/images.png';

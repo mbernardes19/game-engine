@@ -1,21 +1,18 @@
-import GerenciadorCena from "./GerenciadorCena.js";
-import GerenciadorAnimacao from "./animacao/GerenciadorAnimacao.js";
+import Cena from "./Cena.js";
 import Personagem from "./Personagem.js";
 
 export default class GameModel {
-    /**@type {GerenciadorCena} */
-    gerenciadorCenas;
-    /**@type {GerenciadorAnimacao} */
-    gerenciadorAnimacao;
+    /**@type {Cena} */
+    cenaAtual
     /**@type {Personagem} */
     jogador
-    constructor(gerenciadorCenas, gerenciadorAnimacao) {
-        this.gerenciadorCenas = gerenciadorCenas;
-        this.gerenciadorAnimacao = gerenciadorAnimacao;
-        this.jogador = new Personagem('1');
+    constructor(cenaAtual=undefined) {
+        this.cenaAtual = cenaAtual;
+        this.jogador = this.cenaAtual ? this.cenaAtual.pegarJogador() : undefined;
+        document.addEventListener('novaAnimacao', this.mostrar);
     }
 
-    atualizar() {
-
+    mostrar(e) {
+        console.log(e);
     }
 }

@@ -1,45 +1,42 @@
 import Animacao from "./Animacao.js";
 import GerenciadorSprite from "../GerenciadorSprite.js";
+import GameView from "../GameView.js";
+import GerenciadorCena from "../GerenciadorCena.js";
 
 export default class GerenciadorAnimacao {
     gerenciadorCena;
     /**@type {GerenciadorSprite} */
     gerenciadorSprites;
+    novaAnimacaoEvent;
     cenaAtual;
-    objetoAnimacoes = [];
-    canvasCtx;
-    constructor(canvasCtx, gerenciadorCena) {
-        this.canvasCtx = canvasCtx;
-        this.gerenciadorCena = gerenciadorCena || undefined;
+    animacoes = [];
+
+    /**
+     * Gerenciador responsável por criar, armazenar e reproduzir animações em objetos
+     * @param {GerenciadorCena} gerenciadorCena 
+     */
+    constructor(gerenciadorSprites, gerenciadorCena=undefined) {
+        this.gerenciadorCena = gerenciadorCena;
+        this.gerenciadorSprites = gerenciadorSprites;
         this.cenaAtual = this.gerenciadorCena ? this.gerenciadorCena.cenaAtual : undefined;
     }
-    
-    atualizar() {
+
+    emitirEvento(evento) {
+        switch(evento) {
+            case 'novaAnimacao':
+                this.novaAnimacaoEvent = new CustomEvent(evento,{detail: this.animacoes.slice()});
+                document.dispatchEvent(this.novaAnimacaoEvent);
+                break;
+        }
 
     }
 
-    criar(id, idSpriteGroup, idObjeto) {
-        if (this.objetoExisteEmCena(idObjeto, this.cenaAtual)) {
+    criar(id, idSpriteGroup) {
             const spriteGroup = this.gerenciadorSprites.pegarSpriteGroupPorId(idSpriteGroup);
-
             const novaAnimacao = this.criarAnimacao(id, spriteGroup);
-
-            const objetoAnimacao = {objeto: idObjeto, animacoes:[novaAnimacao]};
-    
-            const objetoAnimacoesFiltrados = this.objetoAnimacoes.find((item) => {
-                return item.objeto.id === idObjeto;
-            });
-    
-            if(!objetoAnimacoesFiltrados) {
-                this.objetoAnimacoes.push(objetoAnimacao);
-            }
-            else {
-                objetoAnimacoesFiltrados.animacoes.push(novaAnimacao);
-            }
-        }
-        else {
-            throw new Error('Objeto não existe na cena atual');
-        }
+            this.animacoes.push(novaAnimacao);
+            this.emitirEvento('novaAnimacao');
+            return novaAnimacao;
     }
 
     objetoExisteEmCena(objeto, cena) {
@@ -108,7 +105,7 @@ export default class GerenciadorAnimacao {
     }
 
     deletar(animacao) {
-        const animacoesIds = animacoes.map(anim => anim.id);
+        const animacoesIds = this.objetoAnimacoes.map(anim => anim.id);
         const deleteIdx = animacoesIds.indexOf(animacao.id);
         this.animacoes.splice(deleteIdx, 1);
     }

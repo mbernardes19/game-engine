@@ -1,12 +1,26 @@
+import SpriteGroup from "../SpriteGroup.js";
+
 export default class Animacao {
-
-    constructor(id, sprites, duracao=5, fps=1/3) {
+    /**
+     * Cria um objeto de Animação
+     * @param {string} id 
+     * @param {SpriteGroup} spriteGroup 
+     * @param {number} duracao 
+     * @param {number} fps 
+     */
+    constructor(id, spriteGroup, duracao=5, fps=30) {
+        if (!id) {
+            throw new Error('Animacao deve ter o parâmetro `id` preenchido');
+        }
+        if (!spriteGroup) {
+            throw new Error('Animacao deve ter o parâmetro `spriteGroup` preenchido');
+        }
         this.id = id;
-        this.sprites = sprites;
+        this.spriteGroup = spriteGroup;
         this.duracao = duracao;
-        this.fps = 1/fps;
+        this.fps = fps;
     }
-
+/*
     renderizar() {
         let i = 0;
         let comeco = Date.now();
@@ -40,6 +54,5 @@ export default class Animacao {
 
         } , (this.fps*1000));
     }
-
-
+*/
 }
