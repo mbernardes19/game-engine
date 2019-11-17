@@ -1,4 +1,4 @@
-import Animacao from "./animacao/Animacao.js";
+import Animacao from "../animacao/Animacao.js";
 
 export default class Objeto {
     id;

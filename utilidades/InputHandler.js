@@ -1,5 +1,5 @@
-import GameView from "./GameView.js";
-import GameController from "./GameController.js";
+import GameView from "../GameView.js";
+import GameController from "../GameController.js";
 
 export default class InputHandler{
     /**@type {GameView} */

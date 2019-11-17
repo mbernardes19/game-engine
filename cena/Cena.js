@@ -1,5 +1,8 @@
+import Objeto from "./Objeto.js";
+
 export default class Cena {
     id;
+    /**@type {Objeto[]} */
     objetos = [];
     cenario;
     constructor(id, objetos=[], cenario=undefined) {

@@ -1,18 +1,28 @@
-import Cena from "./Cena.js";
-import Personagem from "./Personagem.js";
+import Cena from "./cena/Cena.js";
+import Personagem from "./cena/Personagem.js";
+import Animacao from "./animacao/Animacao.js";
+import Armazenamento from "./utilidades/Armazenamento.js";
 
 export default class GameModel {
     /**@type {Cena} */
     cenaAtual
     /**@type {Personagem} */
     jogador
-    constructor(cenaAtual=undefined) {
+    /**@type {Animacao[]} */
+    animacoes
+    /**@type {Armazenamento} */
+    armazenamento
+    constructor(armazenamento, cenaAtual=undefined) {
         this.cenaAtual = cenaAtual;
         this.jogador = this.cenaAtual ? this.cenaAtual.pegarJogador() : undefined;
-        document.addEventListener('novaAnimacao', this.mostrar);
+        this.armazenamento = armazenamento;
+        this.pegarAnimacoes();
     }
 
-    mostrar(e) {
-        console.log(e);
+    pegarAnimacoes() {
+        const animacoesPegas = this.armazenamento.pegar('animacoes')
+        this.animacoes = animacoesPegas;
+        console.log(this.animacoes);
+        return animacoesPegas;
     }
 }

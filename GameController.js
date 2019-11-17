@@ -1,9 +1,9 @@
 import GameView from "./GameView.js";
 import GameModel from "./GameModel.js";
-import InputHandler from "./InputHandler.js";
-import GerenciadorCena from "./GerenciadorCena.js";
+import InputHandler from "./utilidades/InputHandler.js";
+import GerenciadorCena from "./cena/GerenciadorCena.js";
 import GerenciadorAnimacao from "./animacao/GerenciadorAnimacao.js";
-import GerenciadorCenario from "./GerenciadorCenario.js";
+import GerenciadorCenario from "./cenario/GerenciadorCenario.js";
 
 export default class GameController {
     /**@type {GameView} */

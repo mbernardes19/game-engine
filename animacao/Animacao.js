@@ -1,4 +1,4 @@
-import SpriteGroup from "../SpriteGroup.js";
+import SpriteGroup from "../sprite/SpriteGroup.js";
 
 export default class Animacao {
     /**
