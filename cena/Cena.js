@@ -5,11 +5,11 @@ export default class Cena {
     /**@type {Objeto[]} */
     objetos = [];
     cenario;
-    constructor(id, objetos=[], cenario=undefined) {
-        this.id = id;
-        this.objetos = objetos;
-        this.cenario = cenario;
-        this.jogador = this.objetos ? this.pegarJogador() : undefined;
+    constructor(builder) {
+        this.id = builder.id;
+        this.objetos = builder.objetos;
+        this.cenario = builder.cenario;
+        this.jogador = builder.objetos ? this.pegarJogador() : undefined;
     }
 
     adicionarObjetos(objetos) {

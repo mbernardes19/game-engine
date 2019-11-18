@@ -6,6 +6,8 @@ import Armazenamento from "./utilidades/Armazenamento.js";
 export default class GameModel {
     /**@type {Cena} */
     cenaAtual
+    /**@type {Cena[]} */
+    cenas
     /**@type {Personagem} */
     jogador
     /**@type {Animacao[]} */
@@ -22,7 +24,15 @@ export default class GameModel {
     pegarAnimacoes() {
         const animacoesPegas = this.armazenamento.pegar('animacoes')
         this.animacoes = animacoesPegas;
-        console.log(this.animacoes);
-        return animacoesPegas;
+    }
+
+    pegarCenas() {
+        const cenasPegas = this.armazenamento.pegar('cenas');
+        this.cenas = cenasPegas;
+    }
+
+    pegarCenaAtual() {
+        const cenaAtualPega = this.armazenamento.pegar('cenaAtual');
+        this.cenaAtual = cenaAtualPega;
     }
 }

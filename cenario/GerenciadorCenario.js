@@ -1,4 +1,4 @@
-import Tile from "./Tile.js";
+import CenarioBuilder from "./CenarioBuilder.js";
 
 export default class GerenciadorCenario {
     gerenciadorSprites;
@@ -6,43 +6,21 @@ export default class GerenciadorCenario {
     linhas;
     cenarios = [];
     tileSets = [];
-    constructor() {
+    constructor() {}
+
+    async pegarConfiguracaoDeJSON(id) {
+        let response = await fetch(`./cenario/lvls/lvl${id}.json`)
+        let cenario = await response.json();
+        return cenario;
+    }
+
+    async criarCenario(id) {
+        const levelConfig = await this.pegarConfiguracaoDeJSON(id);
         
-    }
+        const cenario = new CenarioBuilder()
+        .definirLevel(levelConfig)
+        .pegarCenario();
 
-    criarTileSet(tamanhoTile) {
-        const tileSet = [];
-        const qtdTiles = this.colunas * this.linhas;
-        Array.from({length: qtdTiles}).forEach(loop => {
-            tileSet.push(new Tile(tamanhoTile));
-        })
+        return cenario;
     }
-
-    async pegarConfiguracaoDeJSON(level) {
-            let response = await fetch(`./cenario/lvls/lvl${level}.json`)
-            let data = await response.json();
-            level = data;
-            console.log(level);
-            return level;
-    }
-
-    definirSpritesTiles(levelConfig) {
-        const graficosLevel = levelConfig.mapa_grafico;
-        for(let i = 0; i < this.columns; i++) {
-            for(let j = 0; j < this.rows; j++) {
-                    if (graficosLevel[j][i] === 1)
-                        this.ctx.fillStyle = 'black'; 
-                    if (graficosLevel[j][i] === 2)
-                        this.ctx.fillStyle = 'blue'; 
-                    if (graficosLevel[j][i] === 3)
-                        this.ctx.fillStyle = 'red'; 
-                this.ctx.fillRect(this.TILE_SIZE*i, this.TILE_SIZE*j, this.TILE_SIZE, this.TILE_SIZE);
-            }
-        }
-    }
-
-    atualizar() {
-        
-    }
-
 }

@@ -5,6 +5,7 @@ import GerenciadorCena from './cena/GerenciadorCena.js';
 import Cenario from './cenario/Cenario.js';
 import GameView from './GameView.js';
 import Game from './Game.js';
+import CenaBuilder from './cena/CenaBuilder.js';
 
 // Setar contexto 2d do canvas
 const canvas = document.querySelector('canvas');
@@ -14,12 +15,27 @@ const ctx = canvas.getContext('2d');
 const game = new Game(ctx);
 
 // Criar Palco
+const cena = new CenaBuilder(game.gerenciadorCenarios, game.armazenamento)
+                .criarCenario(1)
+                    .then(cenaComCenario => {
+                        return cenaComCenario
+                            .criarJogador('jog')
+                            .criarObjeto('obj')
+                            .criarObjeto('asdasd')
+                            .definirId('1')
+                            .pegarCena()
+                    });
+/*
     // Criar cena
-    game.gerenciadorCenas.criarCena('lvl1');
-    
+    const cena = game.gerenciadorCenas.criarCena('lvl1');
+        
     // Criar objetos da cena
+    cena.adicionarObjetos(new Personagem('1', Personagem.JOGADOR));
 
     // Criar cenário da cena
+    this.gerenciadorCenarios.criarCenario(1)
+    .then((res) => cena.cenario = res);
+*/
 
 // Criar Animação
     // Criar spritesheet

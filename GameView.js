@@ -29,8 +29,7 @@ export default class GameView {
     atualizar(model) {
         this.model = model;
         this.canvasCtx.clearRect(0,0,this.CANVAS_WIDTH, this.CANVAS_HEIGHT);
-        this.canvasCtx.fillText('X do jogador',0,40);
-        this.canvasCtx.fillText(model.jogador.x,0,50);
+        this.renderizarCenario(this.model.cenaAtual.cenario);
     }
 
     /**
@@ -39,6 +38,21 @@ export default class GameView {
      */
     receberModel(model) {
         this.model = model;
+    }
+
+    /**
+     * 
+     * @param {Cenario} cenario 
+     */
+    renderizarCenario(cenario) {
+        cenario.graficosTiles[0][0].sprite.spritesheet.imagem.onload = () => {
+            for(let i = 0; i < cenario.colunas; i++) {
+                for(let j = 0; j < cenario.linhas; j++) {
+                    const grafico = cenario.graficosTiles[i][j];
+                    this.canvasCtx.drawImage(grafico.sprite.spritesheet.imagem, grafico.sprite.inicioX, grafico.sprite.inicioY, grafico.sprite.largura, grafico.sprite.altura, grafico.sprite.altura*i, grafico.sprite.altura*j, grafico.sprite.largura, grafico.sprite.altura);
+                }
+            }
+        }
     }
 
     reproduzirAnimacao(idObjeto, idAnimacao) {

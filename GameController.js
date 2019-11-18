@@ -58,6 +58,9 @@ export default class GameController {
      * Através dele a View é sempre atualizada quando o Model é atualizado.
      */
     _gameLoop() {
+        // this.model.pegarAnimacoes();
+        this.model.pegarCenas();
+        this.model.pegarCenaAtual();
         this.view.atualizar(this.model);
         requestAnimationFrame(this._gameLoop.bind(this));
     }

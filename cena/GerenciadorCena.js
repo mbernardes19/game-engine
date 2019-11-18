@@ -1,11 +1,15 @@
 import Cena from "./Cena.js";
 import Cenario from '../cenario/Cenario.js';
 import Objeto from "./Objeto.js";
+import GerenciadorCenario from "../cenario/GerenciadorCenario.js";
 
 export default class GerenciadorCena {
     cenas = [];
     cenaAtual;
-    constructor(armazenamento, cenas = []) {
+    /**@type {GerenciadorCenario} */
+    gerenciadorCenarios
+    constructor(armazenamento, gerenciadorCenarios, cenas = []) {
+        this.gerenciadorCenarios = gerenciadorCenarios;
         this.cenas = cenas;
         this.armazenamento = armazenamento;
     }
@@ -30,10 +34,6 @@ export default class GerenciadorCena {
         this.cenas.push(novaCena);
         this.definirAtual(id);
         return novaCena;
-    }
-
-    criarCenaDeJSON(urlJSON) {
-
     }
 
     definirAtual(idCena) {
